@@ -1,5 +1,5 @@
 import express from 'express';
-import { dirname } from 'path';
+import path, { dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 import { __express as ejsEngine } from 'ejs';
@@ -10,6 +10,8 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 
 app.engine('ejs', ejsEngine);
 app.set('view engine', 'ejs');
+
+app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/', (req, res) => {
   res.render(__dirname + '/views/index.ejs');
